@@ -74,19 +74,19 @@ To use the syntastic plugin for Python syntax checking, install flake8:
   pip3 install --user flake8
   ```
 ## Vim Plugins
-* [![Vundle.vim](github.com/VundleVim/Vundle.vim)]                      Plugin Manager
-* [![neomake](github.com/neomake/neomake)]                              Run commands & plugin operations asynchronously
-* [![vim-fugitive](github.com/tpope/vim-fugitive)]                      See git branch and other git info in bottom bar
-* [![ctrlp.vim](github.com/kien/ctrlp.vim)]                             <C-p> for fuzzy-finding files - faster file jumping
-* [![vim-move](github.com/matze/vim-move)]                              Move selected text in visual mode with <A-h/j/k/l>
-* [![vim-sneak](github.com/justinmk/vim-sneak)]                         Smart movement
-* [![tagbar](github.com/majutsushi/tagbar)]                             Browse tags and structure of current file
-* [![papercolor-theme](github.com/NLKNguyen/papercolor-theme)]          Vim colorscheme
-* [![vim-bufferline](github.com/bling/vim-bufferline)]                  See list of buffers in the bottom bar
-* [![vim-airline](github.com/vim-airline/vim-airline)]                  buffer and tab bar styles/themes
-* [![vim-airline-themes](github.com/vim-airline/vim-airline-themes)]
-* [![vim-better-whitespace](github.com/ntpeters/vim-better-whitespace)] Highlight trailing whitespace and simplify stripping it
-* [![tabular](github.com/godlygeek/tabular)]                            Align lines of text based on specified character
-* [![syntastic](github.com/scrooloose/syntastic)]                       Syntax checker - uses above mentioned neomake
-* [![jedi-vim](github.com/davidhalter/jedi-vim)]                        code completion using <C-p> in insert mode
-* [![vim-bitbake](github.com/kergoth/vim-bitbake)]                      Syntax highlighting for bitbake (bb) files
+* [[Vundle.vim](https://github.com/VundleVim/Vundle.vim)]                      Plugin Manager
+* [[neomake](https://github.com/neomake/neomake)]                              Run commands & plugin operations asynchronously
+* [[vim-fugitive](https://github.com/tpope/vim-fugitive)]                      See git branch and other git info in bottom bar
+* [[ctrlp.vim](https://github.com/kien/ctrlp.vim)]                             <C-p> for fuzzy-finding files - faster file jumping
+* [[vim-move](https://github.com/matze/vim-move)]                              Move selected text in visual mode with <A-h/j/k/l>
+* [[vim-sneak](https://github.com/justinmk/vim-sneak)]                         Smart movement
+* [[tagbar](https://github.com/majutsushi/tagbar)]                             Browse tags and structure of current file
+* [[papercolor-theme](https://github.com/NLKNguyen/papercolor-theme)]          Vim colorscheme
+* [[vim-bufferline](https://github.com/bling/vim-bufferline)]                  See list of buffers in the bottom bar
+* [[vim-airline](https://github.com/vim-airline/vim-airline)]                  buffer and tab bar styles/themes
+* [[vim-airline-themes](https://github.com/vim-airline/vim-airline-themes)]
+* [[vim-better-whitespace](https://github.com/ntpeters/vim-better-whitespace)] Highlight trailing whitespace and simplify stripping it
+* [[tabular](https://github.com/godlygeek/tabular)]                            Align lines of text based on specified character
+* [[syntastic](https://github.com/scrooloose/syntastic)]                       Syntax checker - uses above mentioned neomake
+* [[jedi-vim](https://github.com/davidhalter/jedi-vim)]                        code completion using <C-p> in insert mode
+* [[vim-bitbake](https://github.com/kergoth/vim-bitbake)]                      Syntax highlighting for bitbake (bb) files
