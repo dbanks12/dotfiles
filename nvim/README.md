@@ -1,7 +1,7 @@
 # Neovim/Vim Configuration Files
 ## Installation
 Steps:
-1. Copy the `vimrc` to the correct location for either Neovim or Vim
+1. Copy the `init.vim` to the correct location for either Neovim or Vim
 2. Install Vundle Plugin Manager and Vim plugins
 3. Follow optional installation steps as desired
 
@@ -14,32 +14,32 @@ cp dotfiles/nvim/init.vim ~/.config/nvim/init.vim
 ### Vim
 ```
 git clone
-cp dotfiles/vim/init.vim ~/vimrc
+cp dotfiles/vim/init.vim ~/.vimrc
 ```
 
 ### Vundle Plugin Manager
-This is a mandatory prerequisite for usage of the this `vimrc`
+This is a mandatory prerequisite for usage of the this `init.vim`
 
 Install Vundle:
 ```
 $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ```
 Then open vim/nvim and run the following to install all of the plugins that
-are used by this `vimrc`:
+are used by this `init.vim`:
 ```
 :PluginInstall
 ```
 
 ### Themes and Appearance
 #### Powerline
-Install Powerline for slick bottom/top bars and fonts that are enabled in this `vimrc`.
-The `vim-airline*` plugins and their configurations set in this `vimrc` require that
+Install Powerline for slick bottom/top bars and fonts that are enabled in this `init.vim`.
+The `vim-airline*` plugins and their configurations set in this `init.vim` require that
 Powerline is installed, but vim will function fine without it (there will just be some
 odd characters in the buffer and tab bars).
 
 ### Markdown Previewing
 Markdown previewing is an optional feature, and it requires another application to perform
-the actual previewing of the markdown file. The options supported by this `vimrc` file are
+the actual previewing of the markdown file. The options supported by this `init.vim` file are
 `haroopad`, `google-chrome` and `chromium-browser`.
 
 #### Haroopad
