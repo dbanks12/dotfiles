@@ -36,11 +36,12 @@ are used by this `init.vim`:
 Install Powerline for slick bottom/top bars and fonts that are enabled in this `init.vim`.
 The `vim-airline*` plugins and their configurations set in this `init.vim` require that
 Powerline is installed, but vim will function fine without it (there will just be some
-odd characters in the buffer and tab bars). Consult [Powerline - Installation on Linux](https://powerline.readthedocs.io/en/latest/installation/linux.html) and [Powerline Fonts](https://github.com/powerline/fonts) for the most up-to-date installation instrucctions. A summary is here for convenience but may be out of date:
+odd characters in the buffer and tab bars). Consult [Powerline - Installation on Linux](https://powerline.readthedocs.io/en/latest/installation/linux.html) and [Powerline Fonts](https://github.com/powerline/fonts) for the most up-to-date installation instructions. A summary is here for convenience but may be out of date:
 ```
 pip install --user powerline-status
 ```
 To install the fonts, do one of the following:
+
 Debian/Ubuntu:
 ```
 sudo apt-get install fonts-powerline
@@ -87,6 +88,7 @@ likely need to install a markdown-preview browser extension.
 ### Syntastic - Syntax Checker/Linter Installation
 More information on Syntastic's usage, see [Syntastic](https://github.com/scrooloose/syntastic).
 To use the syntastic plugin for Python syntax checking, install the `flake8` linter:
+
   For Python2.7:
   ```
   sudo apt-get install python-flake8
