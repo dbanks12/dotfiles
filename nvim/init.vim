@@ -13,7 +13,7 @@
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Let Vundle manage Vundle, required
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-      Plugin 'VundleVim/Vundle.vim'
+      Plugin 'VundleVim/Vundle.vim' " Plugin Manager
 
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Core Plugins
@@ -25,10 +25,10 @@
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Navigation
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-      Plugin 'kien/ctrlp.vim' " <C-p> for fuzzy-finding files - this is a must-have
-      Plugin 'matze/vim-move'
+      Plugin 'kien/ctrlp.vim' " <C-p> for fuzzy-finding files - faster file jumping
+      Plugin 'matze/vim-move' " Move selected text in visual mode with <A-h/j/k/l>
       Plugin 'justinmk/vim-sneak' " Smart movement
-      Plugin 'majutsushi/tagbar'
+      Plugin 'majutsushi/tagbar' " Browse tags and structure of current file
 
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Themes and Appearance
@@ -43,6 +43,7 @@
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
       Plugin 'ntpeters/vim-better-whitespace' " Highlight trailing whitespace and
                                               " simplify stripping it
+      Plugin 'godlygeek/tabular' " Align lines of text based on specified character
 
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Code completion and syntax checking
@@ -52,8 +53,7 @@
       Plugin 'davidhalter/jedi-vim' " code completion using <C-p> in insert mode
                                     " and goto-definition (<leader>d), etc.
 
-      " Syntax highlighting for bitbake (bb) files
-      Plugin 'kergoth/vim-bitbake'
+      Plugin 'kergoth/vim-bitbake' " Syntax highlighting for bitbake (bb) files
 
     " All of your Plugins must be added before the following line
   call vundle#end()            " required
