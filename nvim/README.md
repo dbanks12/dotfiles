@@ -36,7 +36,30 @@ are used by this `init.vim`:
 Install Powerline for slick bottom/top bars and fonts that are enabled in this `init.vim`.
 The `vim-airline*` plugins and their configurations set in this `init.vim` require that
 Powerline is installed, but vim will function fine without it (there will just be some
-odd characters in the buffer and tab bars).
+odd characters in the buffer and tab bars). Consult [Powerline - Installation on Linux](https://powerline.readthedocs.io/en/latest/installation/linux.html) and [Powerline Fonts](https://github.com/powerline/fonts) for the most up-to-date installation instrucctions. A summary is here for convenience but may be out of date:
+```
+pip install --user powerline-status
+```
+To install the fonts, do one of the following:
+Debian/Ubuntu:
+```
+sudo apt-get install fonts-powerline
+```
+Fedora:
+```
+sudo dnf install powerline-fonts
+```
+Other:
+```
+# clone
+git clone https://github.com/powerline/fonts.git --depth=1
+# install
+cd fonts
+./install.sh
+# clean-up a bit
+cd ..
+rm -rf fonts
+```
 
 ### Markdown Viewing
 Markdown viewing is an optional feature, and it requires another application to perform
@@ -61,7 +84,9 @@ Markdown preview tool, since Vim will of course be your editor.
 The other options for viewing markdown are `google-chrome` or `chromium-browser`, but you will
 likely need to install a markdown-preview browser extension.
 
-To use the syntastic plugin for Python syntax checking, install flake8:
+### Syntastic - Syntax Checker/Linter Installation
+More information on Syntastic's usage, see [Syntastic](https://github.com/scrooloose/syntastic).
+To use the syntastic plugin for Python syntax checking, install the `flake8` linter:
   For Python2.7:
   ```
   sudo apt-get install python-flake8
