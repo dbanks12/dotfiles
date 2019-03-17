@@ -18,7 +18,8 @@
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Core Plugins
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-      Plugin 'neomake/neomake'
+      Plugin 'neomake/neomake' " Run commands & plugin operations asynchronously
+                               " This is especially useful for linters
       Plugin 'tpope/vim-fugitive' " See git branch and other git info in bottom bar
 
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -32,26 +33,24 @@
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Themes and Appearance
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+      Plugin 'NLKNguyen/papercolor-theme' " Vim colorscheme
       Plugin 'bling/vim-bufferline' " See list of buffers in the bottom bar
-      Plugin 'vim-airline/vim-airline'
+      Plugin 'vim-airline/vim-airline' " buffer and tab bar styles/themes
       Plugin 'vim-airline/vim-airline-themes'
 
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Whitespace
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-      Plugin 'ntpeters/vim-better-whitespace'
+      Plugin 'ntpeters/vim-better-whitespace' " Highlight trailing whitespace and
+                                              " simplify stripping it
 
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Code completion and syntax checking
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-      Plugin 'scrooloose/syntastic'
-      Plugin 'davidhalter/jedi-vim'
-
-      " Completor plugin is only supported when the following features exist (or
-      " using Neovim)
-      if ((has('python') || has('python3')) && has('job') && has('timers') && has('lambda')) || has('nvim')
-        Plugin 'maralla/completor.vim'
-      endfunction
+      Plugin 'scrooloose/syntastic' " Syntax checker - uses above mentioned neomake
+                                    " to check files asynchronously
+      Plugin 'davidhalter/jedi-vim' " code completion using <C-p> in insert mode
+                                    " and goto-definition (<leader>d), etc.
 
       " Syntax highlighting for bitbake (bb) files
       Plugin 'kergoth/vim-bitbake'
@@ -134,7 +133,7 @@
     " Terminal mode only exists in Neovim or Vim 8+
     if has('nvim')
       set scrollback=10000
-    elseif v:version < 800
+    elseif v:version >= 800
       set termwinscroll=10000
     endif
 
@@ -163,15 +162,15 @@
   " Allow semicolon to be used like colon as command prefix
   nnoremap ; :
 
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Leader key binding
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     let mapleader = " "
     " I use spacebar for leader
 
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Dot files (.vimrc/init.vim, .bashrc)
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Edit or source vimrc
     nnoremap <Leader>ev :e $MYVIMRC<CR>
     nnoremap <Leader>sv :so $MYVIMRC<CR>
@@ -182,9 +181,9 @@
     nnoremap <Leader>eb :e $HOME/.bashrc<CR>
     nnoremap <Leader>sb :!source $HOME/.bashrc<CR>
 
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Copying and pasting
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Copy and paste to system clipboard
     nnoremap <Leader>y "+y
     nnoremap <Leader>Y "+Y
@@ -195,9 +194,9 @@
     nnoremap <Leader><Leader>p "0p
     nnoremap <Leader><Leader>P "0P
 
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Window management
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Vertically expand/minimize current window
     nnoremap <Leader>+ <C-w>50+
     nnoremap <Leader>= <C-w>50+
@@ -210,7 +209,7 @@
     vnoremap <C-[> <C-\><C-n>
     inoremap <C-[> <C-\><C-n>
     " Enforce double-Esc in terminal mode so Esc can be used for terminal shortcuts
-    if has('nvim') || v:version < 800
+    if has('nvim') || v:version >= 800
       " Terminal mode only exists in Neovim or Vim 8+
       tnoremap <Esc><Esc> <C-\><C-n>
     endif
@@ -241,9 +240,9 @@
         endif
     endfunction<Paste>
 
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Arrow keys
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Disable arrow keys and force usage of 'hjkl' (uncomment to disable the keys)
     "nnoremap <Left> :echo "No left for you!"<CR>
     "vnoremap <Left> :<C-u>echo "No left for you!"<CR>
@@ -258,37 +257,41 @@
     "vnoremap <Down> :<C-u>echo "No down for you!"<CR>
     "inoremap <Down> <C-o>:echo "No down for you!"<CR>
 
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Writing files
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " :W to sudo write a file even if the user does not have write-permissions
     " This is useful when changes were made without realizing the file should've
     " been opened with sudo
     command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Markdown & Latex
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Wl writes and compiles a file (if applicable), and then displays the results
 
     if executable('pdflatex')
       " LaTeX: write file, compile with pdflatex
       if executable('evince')
         " Show PDF results in evince if evince is installed
-        autocmd FileType tex,latex command Wl :w | !pdflatex % | !evince %:r.pdf &
+        autocmd FileType tex,latex command! Wl :w | !pdflatex % | !evince %:r.pdf &
       else
         autocmd FileType tex,latex command! Wl :w | !pdflatex % <CR>
       endif
     endif
 
-    " Markdown: write file and display with haroopad or google-chrome
+    " Markdown: write file and display with haroopad, google-chrome, chromium-browser
     if executable('haroopad')
       autocmd FileType md,makrdown nnoremap command! Wl :w | !haroopad % &
-    elseif executable('haroopad')
+    elseif executable('google-chrome')
       " If haroopad is not installed, use google-chrome
       autocmd FileType md,markdown command! Wl :w | !google-chrome % &
+    elseif executable('chromium-browser')
+      " Fall back on chromium-browser
+      autocmd FileType md,markdown command! Wl :w | !chromium-browser % &
     else
-      echo "Install haroopad or google-chrome to preview Markdown"
+      autocmd FileType md,markdown command! Wl :echo "Install haroopad or google-chrome to preview Markdown"
+    endif
 
     " WL is a common mistype of Wl.... So make it a feature
     command! WL :Wl
@@ -299,6 +302,14 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Note: Many of these are recommended plugin configurations from github
+
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " papercolor-theme
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " set Vim's colorscheme to the dark papercolor theme
+    set t_Co=256   " This is may or may not needed.
+    set background=dark
+    colorscheme PaperColor
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " vim-airline, vim-airline-themes
