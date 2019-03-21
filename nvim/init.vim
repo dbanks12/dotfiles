@@ -33,7 +33,7 @@
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Themes and Appearance
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-      Plugin 'NLKNguyen/papercolor-theme' " Vim colorscheme
+      Plugin 'junegunn/seoul256.vim' " Vim colorscheme
       Plugin 'bling/vim-bufferline' " See list of buffers in the bottom bar
       Plugin 'vim-airline/vim-airline' " buffer and tab bar styles/themes
       Plugin 'vim-airline/vim-airline-themes'
@@ -102,7 +102,7 @@
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Display these special characters to show the presence of various whitespace
     " characters
-    set listchars=eol:⏎,tab:␉·,trail:␠,nbsp:⎵
+    set listchars=eol:⏎,tab:␉·,nbsp:⎵
     set list
 
     " Indentation rules per file-type
@@ -110,7 +110,7 @@
     " using 8 columns for makefiles
     autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
     " For most files, expand tab-presses to use actual spaces and use a width of 4 spaces
-    autocmd FileType py,python,txt,log,text set expandtab shiftwidth=4 softtabstop=4
+    autocmd FileType md,py,python,txt,log,text set expandtab shiftwidth=4 softtabstop=4
     autocmd FileType c,cpp,java,js,verilog,cc,bash,sh,tcl set expandtab shiftwidth=4 softtabstop=4
     " For most files, expand tab-presses to use actual spaces and use a width of 2 spaces
     autocmd FileType vhdl,vim,lua,nginx,html,css,xhtml,xml set shiftwidth=2 softtabstop=2
@@ -186,21 +186,38 @@
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Copy and paste to system clipboard
     nnoremap <Leader>y "+y
+    vnoremap <Leader>y "+y
     nnoremap <Leader>Y "+Y
     nnoremap <Leader>p "+p
+    vnoremap <Leader>p "+p
     nnoremap <Leader>P "+P
+    vnoremap <Leader>P "+P
 
     " Paste most recently yanked text
     nnoremap <Leader><Leader>p "0p
+    vnoremap <Leader><Leader>p "0p
     nnoremap <Leader><Leader>P "0P
+    vnoremap <Leader><Leader>P "0P
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " Window management
+  " Window and tab management
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Vertically expand/minimize current window
     nnoremap <Leader>+ <C-w>50+
     nnoremap <Leader>= <C-w>50+
     nnoremap <Leader>- <C-w>50-
+
+    " Navigate and move tabs more easily
+    nnoremap tH   :tabfirst<CR>
+    nnoremap th   :tabprev<CR>
+    nnoremap tl   :tabnext<CR>
+    nnoremap tL   :tablast<CR>
+    nnoremap tn   :tabnew<CR>
+    nnoremap ttH  :tabmove 0<CR>
+    nnoremap tth  :tabmove -1<CR>
+    nnoremap ttl  :tabmove +1<CR>
+    nnoremap ttL  :tabmove <CR>
+    nnoremap tq   :tabclose<CR>
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Escape key
@@ -260,6 +277,9 @@
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Writing files
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " Shortucut to write files - can be overridden per-filetype (e.g.  markdown, latex)
+    nmap <Leader>w :w<CR>
+
     " :W to sudo write a file even if the user does not have write-permissions
     " This is useful when changes were made without realizing the file should've
     " been opened with sudo
@@ -268,33 +288,31 @@
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Markdown & Latex
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " Wl writes and compiles a file (if applicable), and then displays the results
+    " <Leader>w writes and compiles a file (if applicable), and then displays the results
 
     if executable('pdflatex')
       " LaTeX: write file, compile with pdflatex
       if executable('evince')
         " Show PDF results in evince if evince is installed
-        autocmd FileType tex,latex command! Wl :w | !pdflatex % | !evince %:r.pdf &
+        autocmd FileType tex,latex nnoremap <buffer> <Leader>w :w \| !pdflatex % \| !evince %:r.pdf &<CR>
       else
-        autocmd FileType tex,latex command! Wl :w | !pdflatex % <CR>
+        autocmd FileType tex,latex nnoremap <buffer> <Leader>w :w \| !pdflatex %<CR>
       endif
     endif
 
     " Markdown: write file and display with haroopad, google-chrome, chromium-browser
     if executable('haroopad')
-      autocmd FileType md,makrdown nnoremap command! Wl :w | !haroopad % &
+      autocmd FileType markdown nnoremap <buffer> <Leader>w :w \| !haroopad % &<CR>
     elseif executable('google-chrome')
       " If haroopad is not installed, use google-chrome
-      autocmd FileType md,markdown command! Wl :w | !google-chrome % &
+      autocmd FileType markdown nnoremap <buffer> <Leader>w :w \| !google-chrome % &<CR>
     elseif executable('chromium-browser')
       " Fall back on chromium-browser
-      autocmd FileType md,markdown command! Wl :w | !chromium-browser % &
+      autocmd FileType markdown nnoremap <buffer> <Leader>w :w \| !chromium-browser % &<CR>
+    elseif executable('chromium-browser')
     else
-      autocmd FileType md,markdown command! Wl :echo "Install haroopad or google-chrome to preview Markdown"
+      autocmd FileType markdown nnoremap <buffer> <Leader>w :w \| echo "Install haroopad or google-chrome to preview Markdown"<CR>
     endif
-
-    " WL is a common mistype of Wl.... So make it a feature
-    command! WL :Wl
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -304,21 +322,26 @@
   " Note: Many of these are recommended plugin configurations from github
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " papercolor-theme
+  " seoul256.vim
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " set Vim's colorscheme to the dark papercolor theme
-    set t_Co=256   " This is may or may not needed.
-    set background=dark
-    colorscheme PaperColor
+    colorscheme seoul256
+    " Switch (default: dark)
+    "set background=light
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " vim-airline, vim-airline-themes
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Themes using airline+powerline for bottom bar and tagbar
-    let g:airline_theme='molokai'
+    let g:airline_theme='zenburn'
     let g:airline_powerline_fonts = 1
     let g:airline#extensions#tabline#enabled = 1
     let g:airline#extensions#tabline#formatter = 'default'
+
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " vim-better-whitespace
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " Highlight trailing whitespace in red: 
+    highlight ExtraWhitespace ctermbg=red
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " syntastic

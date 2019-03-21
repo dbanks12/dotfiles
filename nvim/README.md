@@ -108,7 +108,7 @@ To use the syntastic plugin for Python syntax checking, install the `flake8` lin
 * [vim-move](https://github.com/matze/vim-move)                              : Move selected text in visual mode with <A-h/j/k/l>
 * [vim-sneak](https://github.com/justinmk/vim-sneak)                         : Smart movement
 * [tagbar](https://github.com/majutsushi/tagbar)                             : Browse tags and structure of current file
-* [papercolor-theme](https://github.com/NLKNguyen/papercolor-theme)          : Vim colorscheme
+* [seoul256.vim](https://github.com/junegunn/seoul256.vim)                   : Vim colorscheme
 * [vim-bufferline](https://github.com/bling/vim-bufferline)                  : See list of buffers in the bottom bar
 * [vim-airline](https://github.com/vim-airline/vim-airline)                  : buffer and tab bar styles/themes
 * [vim-airline-themes](https://github.com/vim-airline/vim-airline-themes)
