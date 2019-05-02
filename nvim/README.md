@@ -116,4 +116,6 @@ To use the syntastic plugin for Python syntax checking, install the `flake8` lin
 * [tabular](https://github.com/godlygeek/tabular)                            : Align lines of text based on specified character
 * [syntastic](https://github.com/scrooloose/syntastic)                       : Syntax checker - uses above mentioned neomake
 * [jedi-vim](https://github.com/davidhalter/jedi-vim)                        : code completion using <C-p> in insert mode
+* [ultisnips](https://github.com/SirVer/ultisnips)                           : code snippet engine
+* [vim-snippets](https://github.com/honza/vim-snippets)                      : code snippets for various languages
 * [vim-bitbake](https://github.com/kergoth/vim-bitbake)                      : Syntax highlighting for bitbake (bb) files

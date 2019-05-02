@@ -26,7 +26,7 @@
     " Navigation
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
       Plugin 'kien/ctrlp.vim' " <C-p> for fuzzy-finding files - faster file jumping
-      Plugin 'matze/vim-move' " Move selected text in visual mode with <A-h/j/k/l>
+      "Plugin 'matze/vim-move' " Move selected text in visual mode with <A-h/j/k/l>
       Plugin 'justinmk/vim-sneak' " Smart movement
       Plugin 'majutsushi/tagbar' " Browse tags and structure of current file
 
@@ -52,6 +52,8 @@
                                     " to check files asynchronously
       Plugin 'davidhalter/jedi-vim' " code completion using <C-p> in insert mode
                                     " and goto-definition (<leader>d), etc.
+      Plugin 'SirVer/ultisnips'     " code snippet engine
+      Plugin 'honza/vim-snippets'   " code snippets for various languages
 
       Plugin 'kergoth/vim-bitbake' " Syntax highlighting for bitbake (bb) files
 
@@ -110,10 +112,10 @@
     " using 8 columns for makefiles
     autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
     " For most files, expand tab-presses to use actual spaces and use a width of 4 spaces
-    autocmd FileType md,py,python,txt,log,text set expandtab shiftwidth=4 softtabstop=4
+    autocmd FileType markdown,md,py,python,txt,log,text set expandtab shiftwidth=4 softtabstop=4
     autocmd FileType c,cpp,java,js,verilog,cc,bash,sh,tcl set expandtab shiftwidth=4 softtabstop=4
     " For most files, expand tab-presses to use actual spaces and use a width of 2 spaces
-    autocmd FileType vhdl,vim,lua,nginx,html,css,xhtml,xml set shiftwidth=2 softtabstop=2
+    autocmd FileType vhd,vhdl,vim,lua,nginx,html,css,xhtml,xml set expandtab shiftwidth=2 softtabstop=2
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Indentation and Folding
@@ -208,16 +210,23 @@
     nnoremap <Leader>- <C-w>50-
 
     " Navigate and move tabs more easily
-    nnoremap tH   :tabfirst<CR>
-    nnoremap th   :tabprev<CR>
-    nnoremap tl   :tabnext<CR>
-    nnoremap tL   :tablast<CR>
-    nnoremap tn   :tabnew<CR>
-    nnoremap ttH  :tabmove 0<CR>
-    nnoremap tth  :tabmove -1<CR>
-    nnoremap ttl  :tabmove +1<CR>
-    nnoremap ttL  :tabmove <CR>
-    nnoremap tq   :tabclose<CR>
+    nnoremap <Leader>tH   :tabfirst<CR>
+    nnoremap <Leader>th   :tabprev<CR>
+    nnoremap <Leader>tl   :tabnext<CR>
+    nnoremap <Leader>tL   :tablast<CR>
+    nnoremap <Leader>tn   :tabnew<CR>
+    nnoremap <Leader>ttH  :tabmove 0<CR>
+    nnoremap <Leader>tth  :tabmove -1<CR>
+    nnoremap <Leader>ttl  :tabmove +1<CR>
+    nnoremap <Leader>ttL  :tabmove <CR>
+    nnoremap <Leader>tq   :tabclose<CR>
+    nnoremap <Leader>ttt  :tabnew \| terminal<CR>
+
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " Utilities and System Information
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " Get the current date and time
+    nnoremap <Leader>'d :!date<CR>
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Escape key
@@ -335,7 +344,6 @@
     let g:airline_theme='zenburn'
     let g:airline_powerline_fonts = 1
     let g:airline#extensions#tabline#enabled = 1
-    let g:airline#extensions#tabline#formatter = 'default'
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " vim-better-whitespace
@@ -387,3 +395,14 @@
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Open Tagbar on the right
     command! Tg TagbarOpenAutoClose
+ 
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " ultisnips
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+    let g:UltiSnipsExpandTrigger="<tab>"
+    let g:ultisnipsjumpforwardtrigger="<tab>"
+    let g:ultisnipsjumpbackwardtrigger="<s-tab>"
+
+    " If you want :UltiSnipsEdit to split your window.
+    let g:UltiSnipsEditSplit="vertical"
