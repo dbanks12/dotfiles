@@ -55,7 +55,14 @@
       Plugin 'SirVer/ultisnips'     " code snippet engine
       Plugin 'honza/vim-snippets'   " code snippets for various languages
 
-      Plugin 'kergoth/vim-bitbake' " Syntax highlighting for bitbake (bb) files
+      Plugin 'kergoth/vim-bitbake'  " Syntax highlighting for bitbake (bb) files
+      Plugin 'suoto/vim-hdl'        " Syntax highlighting for VHDL
+
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " Note taking
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+      Plugin 'vimwiki/vimwiki'      " Note taking tool
+      Plugin 'junegunn/goyo.vim'    " Center text in page and get in the writing zone
 
     " All of your Plugins must be added before the following line
   call vundle#end()            " required
@@ -69,6 +76,10 @@
 " General Vim settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " Appearance/theme
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Command completion
@@ -177,7 +188,7 @@
     nnoremap <Leader>ev :e $MYVIMRC<CR>
     nnoremap <Leader>sv :so $MYVIMRC<CR>
     " Edit vimrc in new tab
-    nnoremap <Leader>evt :tabedit $MYVIMRC<CR>
+    nnoremap <Leader>tev :tabedit $MYVIMRC<CR>
 
     " Edit or source bashrc
     nnoremap <Leader>eb :e $HOME/.bashrc<CR>
@@ -202,8 +213,11 @@
     vnoremap <Leader><Leader>P "0P
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " Window and tab management
+  " Buffer, window and tab management
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " List buffers and set up the command to switch to a different buffer
+    nnoremap <leader>b :buffers<CR>:buffer<space>
+
     " Vertically expand/minimize current window
     nnoremap <Leader>+ <C-w>50+
     nnoremap <Leader>= <C-w>50+
@@ -284,10 +298,13 @@
     "inoremap <Down> <C-o>:echo "No down for you!"<CR>
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " Writing files
+  " Writing, Editing, Quitting files - Shortcuts
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Shortucut to write files - can be overridden per-filetype (e.g.  markdown, latex)
     nmap <Leader>w :w<CR>
+    nmap <Leader>q :q<CR>
+    nmap <Leader>z <C-z>
+    nmap <Leader>e :e<CR>
 
     " :W to sudo write a file even if the user does not have write-permissions
     " This is useful when changes were made without realizing the file should've
@@ -303,9 +320,9 @@
       " LaTeX: write file, compile with pdflatex
       if executable('evince')
         " Show PDF results in evince if evince is installed
-        autocmd FileType tex,latex nnoremap <buffer> <Leader>w :w \| !pdflatex % \| !evince %:r.pdf &<CR>
+        autocmd FileType tex,latex,plaintex nnoremap <buffer> <Leader>w :w \| execute '!pdflatex % && ( evince %:r.pdf & )'<CR>
       else
-        autocmd FileType tex,latex nnoremap <buffer> <Leader>w :w \| !pdflatex %<CR>
+        autocmd FileType tex,latex,plaintex nnoremap <buffer> <Leader>w :w \| !pdflatex %<CR>
       endif
     endif
 
@@ -337,6 +354,9 @@
     " Switch (default: dark)
     "set background=light
 
+  " This overrides theme background and makes it transparent
+    hi Normal guibg=NONE ctermbg=NONE
+
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " vim-airline, vim-airline-themes
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -362,6 +382,21 @@
     let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 0
     let g:syntastic_python_checkers = ['flake8']
+
+    " leader command+function to toggle syntastic window (location list for errors)
+      noremap <leader>sy <ESC>:call SyntasticToggle()<CR>
+
+      let g:syntastic_is_open = 0
+      function! SyntasticToggle()
+      if g:syntastic_is_open == 1
+          lclose
+          let g:syntastic_is_open = 0
+      else
+          Errors
+          let g:syntastic_is_open = 1
+      endif
+      endfunction
+
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " vim-bufferline
@@ -395,7 +430,7 @@
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Open Tagbar on the right
     command! Tg TagbarOpenAutoClose
- 
+
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " ultisnips
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
