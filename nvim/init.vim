@@ -1,85 +1,14 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vundle Plugin List and required settings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  set nocompatible              " be iMproved, required
-  filetype off                  " required
-
-  " set the runtime path to include Vundle and initialize
-  set rtp+=~/.vim/bundle/Vundle.vim
-
-  call vundle#begin()
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " Let Vundle manage Vundle, required
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-      Plugin 'VundleVim/Vundle.vim' " Plugin Manager
-
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " Core Plugins
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-      Plugin 'neomake/neomake' " Run commands & plugin operations asynchronously
-                               " This is especially useful for linters
-      Plugin 'tpope/vim-fugitive' " See git branch and other git info in bottom bar
-
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " Navigation
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-      Plugin 'kien/ctrlp.vim' " <C-p> for fuzzy-finding files - faster file jumping
-      "Plugin 'matze/vim-move' " Move selected text in visual mode with <A-h/j/k/l>
-      Plugin 'justinmk/vim-sneak' " Smart movement
-      Plugin 'majutsushi/tagbar' " Browse tags and structure of current file
-
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " Themes and Appearance
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-      Plugin 'junegunn/seoul256.vim' " Vim colorscheme
-      Plugin 'bling/vim-bufferline' " See list of buffers in the bottom bar
-      Plugin 'vim-airline/vim-airline' " buffer and tab bar styles/themes
-      Plugin 'vim-airline/vim-airline-themes'
-
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " Whitespace
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-      Plugin 'ntpeters/vim-better-whitespace' " Highlight trailing whitespace and
-                                              " simplify stripping it
-      Plugin 'godlygeek/tabular' " Align lines of text based on specified character
-
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " Code completion and syntax checking
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-      Plugin 'scrooloose/syntastic' " Syntax checker - uses above mentioned neomake
-                                    " to check files asynchronously
-      Plugin 'davidhalter/jedi-vim' " code completion using <C-p> in insert mode
-                                    " and goto-definition (<leader>d), etc.
-      Plugin 'SirVer/ultisnips'     " code snippet engine
-      Plugin 'honza/vim-snippets'   " code snippets for various languages
-
-      Plugin 'kergoth/vim-bitbake'  " Syntax highlighting for bitbake (bb) files
-      Plugin 'suoto/vim-hdl'        " Syntax highlighting for VHDL
-
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " Note taking
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-      Plugin 'vimwiki/vimwiki'      " Note taking tool
-      Plugin 'junegunn/goyo.vim'    " Center text in page and get in the writing zone
-
-    " All of your Plugins must be added before the following line
-  call vundle#end()            " required
-
-  filetype plugin indent on    " required
-  " To ignore plugin indent changes, instead use:
-  "filetype plugin on
-
+" Import plugins if they exist
+if glob("~/.vim_plugins.vim")!=#""
+  source ~/.vim_plugins.vim
+endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General Vim settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " Appearance/theme
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    set laststatus=2
+    set statusline=%!getcwd()
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Command completion
@@ -105,17 +34,20 @@
     set relativenumber
     " Highlighting with the mouse acts as Vim visual mode selections
     set mouse=a
-    " highlight the current line
+    " highlight the current line and column
     set cursorline
+    set cursorcolumn
     " Bold and brighten current line
-    hi CursorLine term=underline cterm=underline cterm=bold guibg=Grey40
+    hi CursorLine term=underline cterm=underline cterm=bold
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Whitespace and Indentation
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Display these special characters to show the presence of various whitespace
     " characters
-    set listchars=eol:⏎,tab:␉·,nbsp:⎵
+    scriptencoding utf-8 " utf-8 encoding to enable these special chars
+    "set listchars=eol:⏎,tab:␉·,nbsp:⎵
+    set listchars=eol:$,tab:>.,nbsp:_
     set list
 
     " Indentation rules per file-type
@@ -144,10 +76,12 @@
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Set the terminal mode scrollback
     " Terminal mode only exists in Neovim or Vim 8+
-    if has('nvim')
-      set scrollback=10000
-    elseif v:version >= 800
-      set termwinscroll=10000
+    if exists(':tnoremap')
+      if has('nvim')
+        set scrollback=10000
+      elseif v:version >= 800
+        set termwinscroll=10000
+      endif
     endif
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -213,6 +147,12 @@
     vnoremap <Leader><Leader>P "0P
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " Editing text
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    nnoremap <Leader>O  O<esc>j
+    nnoremap <Leader>o  o<esc>k
+
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Buffer, window and tab management
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " List buffers and set up the command to switch to a different buffer
@@ -229,18 +169,47 @@
     nnoremap <Leader>tl   :tabnext<CR>
     nnoremap <Leader>tL   :tablast<CR>
     nnoremap <Leader>tn   :tabnew<CR>
-    nnoremap <Leader>ttH  :tabmove 0<CR>
-    nnoremap <Leader>tth  :tabmove -1<CR>
-    nnoremap <Leader>ttl  :tabmove +1<CR>
-    nnoremap <Leader>ttL  :tabmove <CR>
+    nnoremap <Leader>tmH  :tabmove 0<CR>
+    nnoremap <Leader>tmh  :tabmove -1<CR>
+    nnoremap <Leader>tml  :tabmove +1<CR>
+    nnoremap <Leader>tmL  :tabmove <CR>
     nnoremap <Leader>tq   :tabclose<CR>
-    nnoremap <Leader>ttt  :tabnew \| terminal<CR>
+    nnoremap <Leader>te   :tabedit<Space>
+
+    nnoremap <Leader>t;   :tabfirst<CR>
+    nnoremap <Leader>tm;  :tabmove 0<CR>
+    if exists(':tnoremap')
+      " TODO: enable these mappings only if neoterm is installed
+      nnoremap <Leader>tt  :tabnew \| tabmove 0 \| Tnew<CR>
+      " else use this:
+      "nnoremap <Leader>tt  :tabnew \| tabmove 0 \| terminal<CR>
+    endif
+
+    "let @r = 'w t;imake clean; make sim^@^[^['
+    let @r = 'w t;imake clean && make^@^[^['
+
+    if !exists('g:lasttab')
+      let g:lasttab = 1
+    endif
+    nmap <Leader>tp :exe "tabn ".g:lasttab<CR>
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Utilities and System Information
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " Get the current date and time
+    " Print the current date and time
     nnoremap <Leader>'d :!date<CR>
+    " Insert the current date and time at the cursor
+    nnoremap <Leader>,d "=strftime('%c')<C-M>p<CR>
+
+    " Print the current working directory
+    nnoremap <Leader>'p :pwd<CR>
+    " Insert the current working directory at the cursor
+    nnoremap <Leader>,p "=getcwd()<C-M>p<CR>
+
+    " Change directory to the path currently under the cursor, and place the
+    " 'cd <path>' in the unnamed register to easily cd there in terminal mode
+    " as well
+    nnoremap <Leader>cd :let @@ = "cd <C-r><C-f>;" \| cd <C-r><C-f><CR>
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Escape key
@@ -249,7 +218,7 @@
     vnoremap <C-[> <C-\><C-n>
     inoremap <C-[> <C-\><C-n>
     " Enforce double-Esc in terminal mode so Esc can be used for terminal shortcuts
-    if has('nvim') || v:version >= 800
+    if exists(':tnoremap') && (has('nvim') || v:version >= 800)
       " Terminal mode only exists in Neovim or Vim 8+
       tnoremap <Esc><Esc> <C-\><C-n>
     endif
@@ -258,8 +227,20 @@
   " Terminal mode
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Create a terminal buffer in a small window at the bottom of the current one
-    set splitbelow
-    command! St :split | resize 15 | terminal
+    if exists(':tnoremap')
+      set splitbelow
+      command! St :split | resize 15 | terminal
+    endif
+
+    " use neoterm plugin
+    " TODO: enable these mappings only if neoterm is installed
+    " Send a text object to terminal
+    nmap gx  <Plug>(neoterm-repl-send)
+    " Send selected contents to terminal in visual mode
+    vmap gx  <Plug>(neoterm-repl-send)
+    " Send current line to terminal
+    nmap gxx <Plug>(neoterm-repl-send-line)
+    nmap gfx :TREPLSendFile<cr>
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Navigation
@@ -297,6 +278,16 @@
     "vnoremap <Down> :<C-u>echo "No down for you!"<CR>
     "inoremap <Down> <C-o>:echo "No down for you!"<CR>
 
+    "inoremap <BS> <nop>
+    "inoremap <Del> <nop>
+    "nnoremap <Del> <nop>
+    " Train yourself not to hold j,k (and maybe even h,l)
+    "noremap jj <nop>
+    "noremap kk <nop>
+    "noremap hh <nop>
+    "noremap ll <nop>
+
+
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Writing, Editing, Quitting files - Shortcuts
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -304,7 +295,7 @@
     nmap <Leader>w :w<CR>
     nmap <Leader>q :q<CR>
     nmap <Leader>z <C-z>
-    nmap <Leader>e :e<CR>
+    nmap <Leader>e :e<Space>
 
     " :W to sudo write a file even if the user does not have write-permissions
     " This is useful when changes were made without realizing the file should've
@@ -339,105 +330,3 @@
     else
       autocmd FileType markdown nnoremap <buffer> <Leader>w :w \| echo "Install haroopad or google-chrome to preview Markdown"<CR>
     endif
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin Configuratons
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " Note: Many of these are recommended plugin configurations from github
-
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " seoul256.vim
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    colorscheme seoul256
-    " Switch (default: dark)
-    "set background=light
-
-  " This overrides theme background and makes it transparent
-    hi Normal guibg=NONE ctermbg=NONE
-
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " vim-airline, vim-airline-themes
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " Themes using airline+powerline for bottom bar and tagbar
-    let g:airline_theme='zenburn'
-    let g:airline_powerline_fonts = 1
-    let g:airline#extensions#tabline#enabled = 1
-
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " vim-better-whitespace
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " Highlight trailing whitespace in red: 
-    highlight ExtraWhitespace ctermbg=red
-
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " syntastic
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    set statusline+=%#warningmsg#
-    set statusline+=%{SyntasticStatuslineFlag()}
-    set statusline+=%*
-    let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_auto_loc_list = 1
-    let g:syntastic_check_on_open = 1
-    let g:syntastic_check_on_wq = 0
-    let g:syntastic_python_checkers = ['flake8']
-
-    " leader command+function to toggle syntastic window (location list for errors)
-      noremap <leader>sy <ESC>:call SyntasticToggle()<CR>
-
-      let g:syntastic_is_open = 0
-      function! SyntasticToggle()
-      if g:syntastic_is_open == 1
-          lclose
-          let g:syntastic_is_open = 0
-      else
-          Errors
-          let g:syntastic_is_open = 1
-      endif
-      endfunction
-
-
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " vim-bufferline
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    let g:bufferline_echo = 1
-    " Put an asterisk next to files in bufferline that have unwritten changes
-    let g:bufferline_modified = '*'
-    let g:bufferline_show_bufnr = 1
-
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " completor.vim
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    let g:completor_clang_binary = '/usr/bin/clang'
-    let g:completor_auto_trigger = 0
-
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " jedi-vim
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    "let g:loaded_python_provider=1
-    if has('python3')
-      let g:jedi#force_py_version = 3
-    endif
-
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " vim-sneak
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    let g:sneak#label = 1
-
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " tagbar
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " Open Tagbar on the right
-    command! Tg TagbarOpenAutoClose
-
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " ultisnips
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-    let g:UltiSnipsExpandTrigger="<tab>"
-    let g:ultisnipsjumpforwardtrigger="<tab>"
-    let g:ultisnipsjumpbackwardtrigger="<s-tab>"
-
-    " If you want :UltiSnipsEdit to split your window.
-    let g:UltiSnipsEditSplit="vertical"
