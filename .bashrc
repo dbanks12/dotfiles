@@ -35,6 +35,9 @@ export PAGER="less -eFXR"
 set -o vi
 bind -m vi-command ".":yank-last-arg
 
+alias vim="nvim"
+alias vi="vim"
+
 function cpbak() { cp $1 $1.bak; }
 function cprev() { cp $1.bak $1; }
 
