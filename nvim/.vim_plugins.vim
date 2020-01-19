@@ -39,7 +39,6 @@
       Plugin 'bling/vim-bufferline' " See list of buffers in the bottom bar
       Plugin 'vim-airline/vim-airline' " buffer and tab bar styles/themes
       Plugin 'vim-airline/vim-airline-themes'
-      Plugin 'frazrepo/vim-rainbow' " highlight matching parens with diff colors
 
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Whitespace
@@ -148,11 +147,6 @@
     " Put an asterisk next to files in bufferline that have unwritten changes
     let g:bufferline_modified = '*'
     let g:bufferline_show_bufnr = 1
-
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " vim-rainbow
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    let g:rainbow_active = 1
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " completor.vim

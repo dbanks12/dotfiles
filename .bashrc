@@ -35,6 +35,7 @@ export PAGER="less -eFXR"
 set -o vi
 bind -m vi-command ".":yank-last-arg
 
+alias v="nvim"
 alias vim="nvim"
 alias vi="vim"
 
@@ -52,9 +53,6 @@ function h2d() { python3 -c "print(int(\"$1\", 16))"; }
 # Python Math
 function pymath() { python3 -c "print(str($1))"; }
 
-#export XILINXD_LICENSE_FILE=2100@10.3.1.10
-export XILINXD_LICENSE_FILE=/home/dbanks/node_locked_lic/Xilinx.lic
-
 alias mc="make clean"
 alias mk="make"
 alias ms="make sim"
@@ -69,4 +67,5 @@ alias dtcd="dtc -I dtb -O dts"
 if [ -e ~/.bashrc_dev ]; then
     source ~/.bashrc_dev
 fi
+
 export PATH=$PATH:~/diff-so-fancy

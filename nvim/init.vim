@@ -185,9 +185,6 @@ endif
       "nnoremap <Leader>tt  :tabnew \| tabmove 0 \| terminal<CR>
     endif
 
-    "let @r = 'w t;imake clean; make sim^@^[^['
-    let @r = 'w t;imake clean && make^@^[^['
-
     if !exists('g:lasttab')
       let g:lasttab = 1
     endif
@@ -200,11 +197,13 @@ endif
     nnoremap <Leader>'d :!date<CR>
     " Insert the current date and time at the cursor
     nnoremap <Leader>,d "=strftime('%c')<C-M>p<CR>
+    vnoremap <Leader>,d "=strftime('%c')<C-M>p<CR>
 
     " Print the current working directory
     nnoremap <Leader>'p :pwd<CR>
     " Insert the current working directory at the cursor
     nnoremap <Leader>,p "=getcwd()<C-M>p<CR>
+    vnoremap <Leader>,p "=getcwd()<C-M>p<CR>
 
     " Change directory to the path currently under the cursor, and place the
     " 'cd <path>' in the unnamed register to easily cd there in terminal mode
@@ -238,6 +237,7 @@ endif
     nmap gx  <Plug>(neoterm-repl-send)
     " Send selected contents to terminal in visual mode
     vmap gx  <Plug>(neoterm-repl-send)
+    vmap <C-j>  <Plug>(neoterm-repl-send)
     " Send current line to terminal
     nmap gxx <Plug>(neoterm-repl-send-line)
     nmap gfx :TREPLSendFile<cr>
