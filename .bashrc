@@ -28,6 +28,9 @@ alias cl="clear; ls -l"
 alias du0="du -h . --max-depth 0"
 alias du1="du -h . --max-depth 1"
 
+alias fg1="fg %1"
+alias fg2="fg %2"
+
 export LESS="-eFXR"
 export LESSOPEN="||/usr/bin/lesspipe.sh %s"
 export PAGER="less -eFXR"
@@ -68,4 +71,4 @@ if [ -e ~/.bashrc_dev ]; then
     source ~/.bashrc_dev
 fi
 
-export PATH=$PATH:~/diff-so-fancy
+export PATH=$PATH:~/apps/diff-so-fancy

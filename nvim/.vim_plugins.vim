@@ -66,6 +66,11 @@
       "Plugin 'vimwiki/vimwiki'      " Note taking tool
       Plugin 'junegunn/goyo.vim'    " Center text in page and get in the writing zone
 
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " Utilities and System Info
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+      Plugin 'itchyny/calendar.vim'
+
     " All of your Plugins must be added before the following line
   call vundle#end()            " required
 
@@ -183,3 +188,7 @@
 
     " If you want :UltiSnipsEdit to split your window.
     let g:UltiSnipsEditSplit="vertical"
+
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " calendar
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

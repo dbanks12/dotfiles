@@ -119,10 +119,10 @@ endif
   " Dot files (.vimrc/init.vim, .bashrc)
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Edit or source vimrc
-    nnoremap <Leader>ev :e $MYVIMRC<CR>
+    nnoremap <Leader>ev :e ~/.vim_plugins.vim <bar> :split <bar> :wincmd k <bar> :e $MYVIMRC<CR>
     nnoremap <Leader>sv :so $MYVIMRC<CR>
     " Edit vimrc in new tab
-    nnoremap <Leader>tev :tabedit $MYVIMRC<CR>
+    nnoremap <Leader>tev :tabedit ~/.vim_plugins.vim <bar> :split <bar> :wincmd k <bar> :e $MYVIMRC<CR>
 
     " Edit or source bashrc
     nnoremap <Leader>eb :e $HOME/.bashrc<CR>
@@ -198,6 +198,10 @@ endif
     " Insert the current date and time at the cursor
     nnoremap <Leader>,d "=strftime('%c')<C-M>p<CR>
     vnoremap <Leader>,d "=strftime('%c')<C-M>p<CR>
+    " <bar> resize 20
+    "nnoremap <Leader>'t :Calendar -view=clock -split=horizontal -position=below<CR>
+    nnoremap <Leader>'t :Calendar -view=clock -position=below -height=25<CR>
+    nnoremap <Leader>'c :Calendar -view=year  -position=right -width=50<CR>
 
     " Print the current working directory
     nnoremap <Leader>'p :pwd<CR>
@@ -209,6 +213,9 @@ endif
     " 'cd <path>' in the unnamed register to easily cd there in terminal mode
     " as well
     nnoremap <Leader>cd :let @@ = "cd <C-r><C-f>;" \| cd <C-r><C-f><CR>
+
+    " Open up tagbar on the right
+    nnoremap <Leader>tg :TagbarOpenAutoClose<CR>
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Escape key
