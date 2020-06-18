@@ -15,6 +15,7 @@ cp dotfiles/nvim/init.vim ~/.config/nvim/init.vim
 ```
 git clone
 cp dotfiles/vim/init.vim ~/.vimrc
+cp dotfiles/vim/.vim_plugins.vim ~/
 ```
 
 ### Vundle Plugin Manager

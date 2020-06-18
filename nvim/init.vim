@@ -33,7 +33,7 @@ endif
     set number
     set relativenumber
     " Highlighting with the mouse acts as Vim visual mode selections
-    set mouse=a
+    "set mouse=a
     " highlight the current line and column
     set cursorline
     set cursorcolumn
